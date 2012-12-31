@@ -23,20 +23,20 @@ class Layer(object):
         self.name = name
         self.x = 0
         self.y = 0
-        self.pen_down = True
+        self._pen_down = True
 
-    def pen_up():
-        self.pen_down = False
+    def pen_up(self):
+        self._pen_down = False
 
-    def pen_down():
-        self.pen_down = True
+    def pen_down(self):
+        self._pen_down = True
 
     def move(self, xd, yd):
         self.x += xd
         self.y += yd
 
     def line(self, xd, yd):
-        if self.pen_down:
+        if self._pen_down:
             self.dwg.add(dxf.line(
                 (self.x, self.y),
                 (self.x + xd, self.y + yd),
@@ -45,7 +45,7 @@ class Layer(object):
         self.move(xd, yd)
 
     def _arc(self, radius, a1, a2):
-        if self.pen_down:
+        if self._pen_down:
             self.dwg.add(dxf.arc(
                 radius=radius,
                 center=(self.x, self.y),
