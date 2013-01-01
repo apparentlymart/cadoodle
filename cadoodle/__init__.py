@@ -36,7 +36,7 @@ class Layer(object):
         self.y += yd
 
     def line(self, xd, yd):
-        if self._pen_down:
+        if self._pen_down and (xd != 0 or yd != 0):
             self.dwg.add(dxf.line(
                 (self.x, self.y),
                 (self.x + xd, self.y + yd),
